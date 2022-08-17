@@ -1,0 +1,63 @@
+name: Create brute force index
+inputs:
+- {name: project, type: String}
+- {name: location, type: String}
+- {name: staging_bucket, type: String}
+- {name: vpc_network_name, type: String}
+- {name: emb_index_gcs_uri, type: String}
+- {name: dimensions, type: Integer}
+- {name: brute_force_index_display_name, type: String}
+- {name: approximate_neighbors_count, type: Integer}
+- {name: distance_measure_type, type: String}
+- {name: brute_force_index_description, type: String}
+- {name: brute_force_index_labels, type: typing.Dict}
+outputs:
+- {name: brute_force_index_resource_uri, type: String}
+- {name: brute_force_index, type: Artifact}
+implementation:
+  container:
+    image: python:3.9
+    command:
+    - sh
+    - -c
+    - |2
+
+      if ! [ -x "$(command -v pip)" ]; then
+          python3 -m ensurepip || python3 -m ensurepip --user || apt-get install python3-pip
+      fi
+
+      PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet     --no-warn-script-location 'google-cloud-aiplatform==1.16.1' 'kfp==1.8.13' && "$0" "$@"
+    - sh
+    - -ec
+    - |
+      program_path=$(mktemp -d)
+      printf "%s" "$0" > "$program_path/ephemeral_component.py"
+      python3 -m kfp.v2.components.executor_main                         --component_module_path                         "$program_path/ephemeral_component.py"                         "$@"
+    - "\nimport kfp\nfrom kfp.v2 import dsl\nfrom kfp.v2.dsl import *\nfrom typing\
+      \ import *\n\ndef create_brute_force_index(\n    project: str,\n    location:\
+      \ str,\n    staging_bucket: str,\n    vpc_network_name: str,\n    emb_index_gcs_uri:\
+      \ str,\n    dimensions: int,\n    brute_force_index_display_name: str,\n   \
+      \ approximate_neighbors_count: int,\n    distance_measure_type: str,\n    brute_force_index_description:\
+      \ str,\n    brute_force_index_labels: Dict,\n) -> NamedTuple('Outputs', [('brute_force_index_resource_uri',\
+      \ str),\n                            ('brute_force_index', Artifact),]):\n\n\
+      \n  from google.cloud import aiplatform\n  from datetime import datetime\n\n\
+      \  aiplatform.init(project=project, location=location, staging_bucket=staging_bucket)\n\
+      \  TIMESTAMP = datetime.now().strftime(\"%Y%m%d%H%M%S\")\n\n\n  ENDPOINT = \"\
+      {}-aiplatform.googleapis.com\".format(location)\n  NETWORK_NAME = vpc_network_name\n\
+      \  INDEX_DIR_GCS = emb_index_gcs_uri\n  PARENT = \"projects/{}/locations/{}\"\
+      .format(project, location)\n\n  print(\"ENDPOINT: {}\".format(ENDPOINT))\n \
+      \ print(\"PROJECT_ID: {}\".format(project))\n  print(\"REGION: {}\".format(location))\n\
+      \n  brute_force_index = aiplatform.MatchingEngineIndex.create_brute_force_index(\n\
+      \      display_name=f'{brute_force_index_display_name}-{TIMESTAMP}',\n     \
+      \ contents_delta_uri=emb_index_gcs_uri,\n      dimensions=dimensions,\n    \
+      \  # approximate_neighbors_count=approximate_neighbors_count,\n      distance_measure_type=distance_measure_type,\n\
+      \      description=brute_force_index_description,\n      labels=brute_force_index_labels,\n\
+      \  )\n  brute_force_index_resource_uri = brute_force_index.resource_name\n \
+      \ print(\"brute_force_index_resource_uri:\",brute_force_index_resource_uri)\
+      \ \n\n  return (\n      f'{brute_force_index_resource_uri}',\n      brute_force_index,\n\
+      \  )\n\n"
+    args:
+    - --executor_input
+    - {executorInput: null}
+    - --function_to_execute
+    - create_brute_force_index

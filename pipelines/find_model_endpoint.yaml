@@ -1,0 +1,81 @@
+name: Find model endpoint test
+inputs:
+- {name: project, type: String}
+- {name: location, type: String}
+- {name: endpoint_name, type: String}
+outputs:
+- {name: create_new_endpoint, type: String}
+- {name: existing_endpoint_uri, type: String}
+- {name: deployed_models_count, type: Integer}
+- {name: undeploy_model_needed, type: String}
+- {name: deployed_model_list, type: JsonArray}
+- {name: endpoint_traffic_split, type: String}
+implementation:
+  container:
+    image: python:3.9
+    command:
+    - sh
+    - -c
+    - |2
+
+      if ! [ -x "$(command -v pip)" ]; then
+          python3 -m ensurepip || python3 -m ensurepip --user || apt-get install python3-pip
+      fi
+
+      PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet     --no-warn-script-location 'google-cloud-aiplatform==1.16.1' 'kfp==1.8.13' && "$0" "$@"
+    - sh
+    - -ec
+    - |
+      program_path=$(mktemp -d)
+      printf "%s" "$0" > "$program_path/ephemeral_component.py"
+      python3 -m kfp.v2.components.executor_main                         --component_module_path                         "$program_path/ephemeral_component.py"                         "$@"
+    - "\nimport kfp\nfrom kfp.v2 import dsl\nfrom kfp.v2.dsl import *\nfrom typing\
+      \ import *\n\ndef find_model_endpoint_test(\n    project: str,\n    location:\
+      \ str,\n    endpoint_name: str,\n) -> NamedTuple('Outputs', [\n            \
+      \                ('create_new_endpoint', str),\n                           \
+      \ ('existing_endpoint_uri', str),\n                            ('deployed_models_count',\
+      \ int),\n                            ('undeploy_model_needed', str),\n     \
+      \                       ('deployed_model_list', list),\n                   \
+      \         ('endpoint_traffic_split', str),\n]):\n\n  from google.cloud import\
+      \ aiplatform\n  import json\n  import logging\n\n  aiplatform.init(\n      project=project,\n\
+      \      location=location,\n  )\n\n  deployed_model_list = []\n\n  logging.info(f\"\
+      Searching for model endpoint: {endpoint_name}\")\n\n  if aiplatform.Endpoint.list(\n\
+      \      filter=f'display_name=\"{endpoint_name}\"'):\n    '''\n    Because existing\
+      \ Endpoint found: \n        (1) will not create new\n        (2) Need the endpoint\
+      \ uri\n        (3) Need list of deployed models on this endpoint;\n        (4)\
+      \ If more than 1 deployed model exists, trigger subsequent conditional step\n\
+      \            to undeploy all but 1 (latest) model \n\n    '''\n    logging.info(f\"\
+      Model endpoint, {endpoint_name}, already exists\")\n    create_new_endpoint=\"\
+      False\"\n\n    # create endpoint list resource in memory\n    _endpoint = aiplatform.Endpoint.list(\n\
+      \        filter=f'display_name=\"{endpoint_name}\"'\n    )[0]\n    logging.info(f\"\
+      Parsing details for _endpoint: {_endpoint}\")\n\n    # retrieve endpoint uri\n\
+      \    existing_endpoint_uri = _endpoint.resource_name\n    logging.info(f\"existing_endpoint_uri:\
+      \ {existing_endpoint_uri}\")\n    _traffic_split = _endpoint.traffic_split\n\
+      \n    # retrieve deployed model IDs\n    deployed_models = _endpoint.gca_resource.deployed_models\n\
+      \    deployed_models_count = len(deployed_models)\n    logging.info(f\"deployed_models_count:\
+      \ {deployed_models_count}\")\n\n    if deployed_models_count > 1:\n      # deployed_model_id_0\
+      \ = _endpoint.gca_resource.deployed_models[0].id\n      # deployed_model_id_1\
+      \ = _endpoint.gca_resource.deployed_models[1].id\n      undeploy_model_needed\
+      \ = \"True\"                                             # arbitrary assumption:\
+      \ no more than 2 (3) models per model_endpoint\n      for model in deployed_models:\n\
+      \        deployed_model_list.append(model.id)\n    elif deployed_models_count\
+      \ == 0:\n      undeploy_model_needed = \"False\"\n    else:\n      undeploy_model_needed\
+      \ = \"False\"\n      deployed_model_list.append(_endpoint.gca_resource.deployed_models[0].id)\n\
+      \n    # deployed_model_id = _endpoint.gca_resource.deployed_models[0].id\n \
+      \   logging.info(f\"Currently deployed_model_list {deployed_model_list}\")\n\
+      \n  else:\n    logging.info(f\"Model endpoint, {endpoint_name}, does not exist\"\
+      )\n\n    create_new_endpoint=\"True\"\n    deployed_models_count=0\n    existing_endpoint_uri=\"\
+      N/A\"\n    undeploy_model_needed = \"N/A\"\n    _traffic_split = \"N/A\"\n \
+      \   # deployed_model_list = []\n\n  logging.info(f\"create_new_endpoint {create_new_endpoint}\"\
+      )\n  logging.info(f\"existing_endpoint_uri {existing_endpoint_uri}\")\n  logging.info(f\"\
+      deployed_models_count {deployed_models_count}\")\n  logging.info(f\"undeploy_model_needed\
+      \ {undeploy_model_needed}\")\n  logging.info(f\"deployed_model_list {deployed_model_list}\"\
+      )\n  logging.info(f\"_traffic_split {_traffic_split}\")\n\n\n  return (\n  \
+      \    f'{create_new_endpoint}',\n      f'{existing_endpoint_uri}',\n      deployed_models_count,\n\
+      \      f'{undeploy_model_needed}',\n      deployed_model_list,\n      f'{_traffic_split}',\n\
+      \  )\n\n"
+    args:
+    - --executor_input
+    - {executorInput: null}
+    - --function_to_execute
+    - find_model_endpoint_test

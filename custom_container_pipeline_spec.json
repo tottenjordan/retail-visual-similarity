@@ -1,0 +1,926 @@
+{
+  "pipelineSpec": {
+    "components": {
+      "comp-create-ann-index": {
+        "executorLabel": "exec-create-ann-index",
+        "inputDefinitions": {
+          "parameters": {
+            "ann_index_description": {
+              "type": "STRING"
+            },
+            "ann_index_display_name": {
+              "type": "STRING"
+            },
+            "ann_index_labels": {
+              "type": "STRING"
+            },
+            "approximate_neighbors_count": {
+              "type": "INT"
+            },
+            "dimensions": {
+              "type": "INT"
+            },
+            "distance_measure_type": {
+              "type": "STRING"
+            },
+            "emb_index_gcs_uri": {
+              "type": "STRING"
+            },
+            "leaf_node_embedding_count": {
+              "type": "INT"
+            },
+            "leaf_nodes_to_search_percent": {
+              "type": "INT"
+            },
+            "location": {
+              "type": "STRING"
+            },
+            "project": {
+              "type": "STRING"
+            },
+            "staging_bucket": {
+              "type": "STRING"
+            },
+            "vpc_network_name": {
+              "type": "STRING"
+            }
+          }
+        },
+        "outputDefinitions": {
+          "artifacts": {
+            "ann_index": {
+              "artifactType": {
+                "schemaTitle": "system.Artifact",
+                "schemaVersion": "0.0.1"
+              }
+            }
+          },
+          "parameters": {
+            "ann_index_resource_uri": {
+              "type": "STRING"
+            }
+          }
+        }
+      },
+      "comp-create-brute-force-index": {
+        "executorLabel": "exec-create-brute-force-index",
+        "inputDefinitions": {
+          "parameters": {
+            "approximate_neighbors_count": {
+              "type": "INT"
+            },
+            "brute_force_index_description": {
+              "type": "STRING"
+            },
+            "brute_force_index_display_name": {
+              "type": "STRING"
+            },
+            "brute_force_index_labels": {
+              "type": "STRING"
+            },
+            "dimensions": {
+              "type": "INT"
+            },
+            "distance_measure_type": {
+              "type": "STRING"
+            },
+            "emb_index_gcs_uri": {
+              "type": "STRING"
+            },
+            "location": {
+              "type": "STRING"
+            },
+            "project": {
+              "type": "STRING"
+            },
+            "staging_bucket": {
+              "type": "STRING"
+            },
+            "vpc_network_name": {
+              "type": "STRING"
+            }
+          }
+        },
+        "outputDefinitions": {
+          "artifacts": {
+            "brute_force_index": {
+              "artifactType": {
+                "schemaTitle": "system.Artifact",
+                "schemaVersion": "0.0.1"
+              }
+            }
+          },
+          "parameters": {
+            "brute_force_index_resource_uri": {
+              "type": "STRING"
+            }
+          }
+        }
+      },
+      "comp-create-index-endpoint-vpc": {
+        "executorLabel": "exec-create-index-endpoint-vpc",
+        "inputDefinitions": {
+          "parameters": {
+            "index_endpoint_description": {
+              "type": "STRING"
+            },
+            "index_endpoint_display_name": {
+              "type": "STRING"
+            },
+            "location": {
+              "type": "STRING"
+            },
+            "project": {
+              "type": "STRING"
+            },
+            "project_number": {
+              "type": "STRING"
+            },
+            "staging_bucket": {
+              "type": "STRING"
+            },
+            "vpc_network_name": {
+              "type": "STRING"
+            }
+          }
+        },
+        "outputDefinitions": {
+          "artifacts": {
+            "index_endpoint": {
+              "artifactType": {
+                "schemaTitle": "system.Artifact",
+                "schemaVersion": "0.0.1"
+              }
+            }
+          },
+          "parameters": {
+            "index_endpoint_display_name": {
+              "type": "STRING"
+            },
+            "index_endpoint_resource_uri": {
+              "type": "STRING"
+            },
+            "vpc_network_resource_uri": {
+              "type": "STRING"
+            }
+          }
+        }
+      },
+      "comp-deploy-ann-index": {
+        "executorLabel": "exec-deploy-ann-index",
+        "inputDefinitions": {
+          "parameters": {
+            "ann_index_resource_uri": {
+              "type": "STRING"
+            },
+            "deployed_ann_index_name": {
+              "type": "STRING"
+            },
+            "index_endpoint_resource_uri": {
+              "type": "STRING"
+            },
+            "location": {
+              "type": "STRING"
+            },
+            "project": {
+              "type": "STRING"
+            },
+            "staging_bucket": {
+              "type": "STRING"
+            }
+          }
+        },
+        "outputDefinitions": {
+          "artifacts": {
+            "deployed_ann_index": {
+              "artifactType": {
+                "schemaTitle": "system.Artifact",
+                "schemaVersion": "0.0.1"
+              }
+            }
+          },
+          "parameters": {
+            "ann_index_resource_uri": {
+              "type": "STRING"
+            },
+            "deployed_ann_index_name": {
+              "type": "STRING"
+            },
+            "index_endpoint_resource_uri": {
+              "type": "STRING"
+            }
+          }
+        }
+      },
+      "comp-deploy-brute-index": {
+        "executorLabel": "exec-deploy-brute-index",
+        "inputDefinitions": {
+          "parameters": {
+            "brute_force_index_resource_uri": {
+              "type": "STRING"
+            },
+            "deployed_brute_force_index_name": {
+              "type": "STRING"
+            },
+            "index_endpoint_resource_uri": {
+              "type": "STRING"
+            },
+            "location": {
+              "type": "STRING"
+            },
+            "project": {
+              "type": "STRING"
+            },
+            "staging_bucket": {
+              "type": "STRING"
+            }
+          }
+        },
+        "outputDefinitions": {
+          "artifacts": {
+            "deployed_brute_force_index": {
+              "artifactType": {
+                "schemaTitle": "system.Artifact",
+                "schemaVersion": "0.0.1"
+              }
+            }
+          },
+          "parameters": {
+            "brute_force_index_resource_uri": {
+              "type": "STRING"
+            },
+            "deployed_brute_force_index_name": {
+              "type": "STRING"
+            },
+            "index_endpoint_resource_uri": {
+              "type": "STRING"
+            }
+          }
+        }
+      },
+      "comp-feature-extraction": {
+        "executorLabel": "exec-feature-extraction",
+        "inputDefinitions": {
+          "parameters": {
+            "emb_index_gcs_uri": {
+              "type": "STRING"
+            },
+            "images_gcs_uri": {
+              "type": "STRING"
+            },
+            "index_json_name": {
+              "type": "STRING"
+            },
+            "location": {
+              "type": "STRING"
+            },
+            "project": {
+              "type": "STRING"
+            },
+            "saved_model_gcs_bucket": {
+              "type": "STRING"
+            }
+          }
+        },
+        "outputDefinitions": {
+          "parameters": {
+            "embedding_index_file_uri": {
+              "type": "STRING"
+            },
+            "saved_pretrained_model_gcs_location": {
+              "type": "STRING"
+            }
+          }
+        }
+      },
+      "comp-query-deployed-indexes": {
+        "executorLabel": "exec-query-deployed-indexes",
+        "inputDefinitions": {
+          "parameters": {
+            "deployed_ann_index_name": {
+              "type": "STRING"
+            },
+            "deployed_brute_force_index_name": {
+              "type": "STRING"
+            },
+            "index_endpoint_resource_uri": {
+              "type": "STRING"
+            },
+            "location": {
+              "type": "STRING"
+            },
+            "num_neighbors": {
+              "type": "INT"
+            },
+            "num_test_samples": {
+              "type": "INT"
+            },
+            "project": {
+              "type": "STRING"
+            },
+            "staging_bucket": {
+              "type": "STRING"
+            },
+            "test_imgs_gcs_dir": {
+              "type": "STRING"
+            },
+            "vertex_model_gcs_dir": {
+              "type": "STRING"
+            }
+          }
+        }
+      }
+    },
+    "deploymentSpec": {
+      "executors": {
+        "exec-create-ann-index": {
+          "container": {
+            "args": [
+              "--executor_input",
+              "{{$}}",
+              "--function_to_execute",
+              "create_ann_index"
+            ],
+            "command": [
+              "sh",
+              "-c",
+              "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip || python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet     --no-warn-script-location 'google-cloud-aiplatform==1.16.1' 'kfp==1.8.13' && \"$0\" \"$@\"\n",
+              "sh",
+              "-ec",
+              "program_path=$(mktemp -d)\nprintf \"%s\" \"$0\" > \"$program_path/ephemeral_component.py\"\npython3 -m kfp.v2.components.executor_main                         --component_module_path                         \"$program_path/ephemeral_component.py\"                         \"$@\"\n",
+              "\nimport kfp\nfrom kfp.v2 import dsl\nfrom kfp.v2.dsl import *\nfrom typing import *\n\ndef create_ann_index(\n    project: str,\n    location: str,\n    staging_bucket: str,\n    vpc_network_name: str,\n    emb_index_gcs_uri: str,\n    dimensions: int,\n    ann_index_display_name: str,\n    approximate_neighbors_count: int,\n    distance_measure_type: str,\n    leaf_node_embedding_count: int,\n    leaf_nodes_to_search_percent: int, \n    ann_index_description: str,\n    ann_index_labels: Dict, \n) -> NamedTuple('Outputs', [('ann_index_resource_uri', str),\n                            ('ann_index', Artifact),]):\n\n\n  from google.cloud import aiplatform\n  from datetime import datetime\n\n  aiplatform.init(project=project, location=location, staging_bucket=staging_bucket)\n  TIMESTAMP = datetime.now().strftime(\"%Y%m%d%H%M%S\")\n\n\n  ENDPOINT = \"{}-aiplatform.googleapis.com\".format(location)\n  NETWORK_NAME = vpc_network_name\n  INDEX_DIR_GCS = emb_index_gcs_uri\n  PARENT = \"projects/{}/locations/{}\".format(project, location)\n\n  print(\"ENDPOINT: {}\".format(ENDPOINT))\n  print(\"PROJECT_ID: {}\".format(project))\n  print(\"REGION: {}\".format(location))\n\n  ann_index = aiplatform.MatchingEngineIndex.create_tree_ah_index(\n      display_name=f'{ann_index_display_name}-{TIMESTAMP}',\n      contents_delta_uri=emb_index_gcs_uri,\n      dimensions=dimensions,\n      approximate_neighbors_count=approximate_neighbors_count,\n      distance_measure_type=distance_measure_type,\n      leaf_node_embedding_count=leaf_node_embedding_count,\n      leaf_nodes_to_search_percent=leaf_nodes_to_search_percent,\n      description=ann_index_description,\n      labels=ann_index_labels,\n  )\n\n  ann_index_resource_uri = ann_index.resource_name\n  print(\"ann_index_resource_uri:\", ann_index_resource_uri) \n\n  return (\n      f'{ann_index_resource_uri}',\n      ann_index,\n  )\n\n"
+            ],
+            "image": "python:3.9"
+          }
+        },
+        "exec-create-brute-force-index": {
+          "container": {
+            "args": [
+              "--executor_input",
+              "{{$}}",
+              "--function_to_execute",
+              "create_brute_force_index"
+            ],
+            "command": [
+              "sh",
+              "-c",
+              "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip || python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet     --no-warn-script-location 'google-cloud-aiplatform==1.16.1' 'kfp==1.8.13' && \"$0\" \"$@\"\n",
+              "sh",
+              "-ec",
+              "program_path=$(mktemp -d)\nprintf \"%s\" \"$0\" > \"$program_path/ephemeral_component.py\"\npython3 -m kfp.v2.components.executor_main                         --component_module_path                         \"$program_path/ephemeral_component.py\"                         \"$@\"\n",
+              "\nimport kfp\nfrom kfp.v2 import dsl\nfrom kfp.v2.dsl import *\nfrom typing import *\n\ndef create_brute_force_index(\n    project: str,\n    location: str,\n    staging_bucket: str,\n    vpc_network_name: str,\n    emb_index_gcs_uri: str,\n    dimensions: int,\n    brute_force_index_display_name: str,\n    approximate_neighbors_count: int,\n    distance_measure_type: str,\n    brute_force_index_description: str,\n    brute_force_index_labels: Dict,\n) -> NamedTuple('Outputs', [('brute_force_index_resource_uri', str),\n                            ('brute_force_index', Artifact),]):\n\n\n  from google.cloud import aiplatform\n  from datetime import datetime\n\n  aiplatform.init(project=project, location=location, staging_bucket=staging_bucket)\n  TIMESTAMP = datetime.now().strftime(\"%Y%m%d%H%M%S\")\n\n\n  ENDPOINT = \"{}-aiplatform.googleapis.com\".format(location)\n  NETWORK_NAME = vpc_network_name\n  INDEX_DIR_GCS = emb_index_gcs_uri\n  PARENT = \"projects/{}/locations/{}\".format(project, location)\n\n  print(\"ENDPOINT: {}\".format(ENDPOINT))\n  print(\"PROJECT_ID: {}\".format(project))\n  print(\"REGION: {}\".format(location))\n\n  brute_force_index = aiplatform.MatchingEngineIndex.create_brute_force_index(\n      display_name=f'{brute_force_index_display_name}-{TIMESTAMP}',\n      contents_delta_uri=emb_index_gcs_uri,\n      dimensions=dimensions,\n      # approximate_neighbors_count=approximate_neighbors_count,\n      distance_measure_type=distance_measure_type,\n      description=brute_force_index_description,\n      labels=brute_force_index_labels,\n  )\n  brute_force_index_resource_uri = brute_force_index.resource_name\n  print(\"brute_force_index_resource_uri:\",brute_force_index_resource_uri) \n\n  return (\n      f'{brute_force_index_resource_uri}',\n      brute_force_index,\n  )\n\n"
+            ],
+            "image": "python:3.9"
+          }
+        },
+        "exec-create-index-endpoint-vpc": {
+          "container": {
+            "args": [
+              "--executor_input",
+              "{{$}}",
+              "--function_to_execute",
+              "create_index_endpoint_vpc"
+            ],
+            "command": [
+              "sh",
+              "-c",
+              "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip || python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet     --no-warn-script-location 'google-cloud-aiplatform==1.16.1' 'kfp==1.8.13' && \"$0\" \"$@\"\n",
+              "sh",
+              "-ec",
+              "program_path=$(mktemp -d)\nprintf \"%s\" \"$0\" > \"$program_path/ephemeral_component.py\"\npython3 -m kfp.v2.components.executor_main                         --component_module_path                         \"$program_path/ephemeral_component.py\"                         \"$@\"\n",
+              "\nimport kfp\nfrom kfp.v2 import dsl\nfrom kfp.v2.dsl import *\nfrom typing import *\n\ndef create_index_endpoint_vpc(\n    project: str,\n    project_number: str,\n    location: str,\n    staging_bucket: str,\n    vpc_network_name: str,\n    index_endpoint_display_name: str,\n    index_endpoint_description: str,\n) -> NamedTuple('Outputs', [\n                            ('vpc_network_resource_uri', str),\n                            ('index_endpoint_resource_uri', str),\n                            ('index_endpoint', Artifact),\n                            ('index_endpoint_display_name', str),\n                            ]):\n\n  from google.cloud import aiplatform\n  from datetime import datetime\n\n  aiplatform.init(project=project, location=location, staging_bucket=staging_bucket)\n  TIMESTAMP = datetime.now().strftime(\"%Y%m%d%H%M%S\")\n\n  vpc_network_resource_uri = f'projects/{project_number}/global/networks/{vpc_network_name}'\n  print(\"vpc_network_resource_uri:\", vpc_network_resource_uri)\n\n  index_endpoint = aiplatform.MatchingEngineIndexEndpoint.create(\n      display_name=f'{index_endpoint_display_name}-{TIMESTAMP}',\n      description=index_endpoint_description,\n      network=vpc_network_resource_uri,\n  )\n  index_endpoint_resource_uri = index_endpoint.resource_name\n  print(\"index_endpoint_resource_uri:\", index_endpoint_resource_uri)\n\n  return (\n      f'{vpc_network_resource_uri}',\n      f'{index_endpoint_resource_uri}',\n      index_endpoint,\n      f'{index_endpoint_display_name}-{TIMESTAMP}'\n  )\n\n"
+            ],
+            "image": "python:3.9"
+          }
+        },
+        "exec-deploy-ann-index": {
+          "container": {
+            "args": [
+              "--executor_input",
+              "{{$}}",
+              "--function_to_execute",
+              "deploy_ann_index"
+            ],
+            "command": [
+              "sh",
+              "-c",
+              "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip || python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet     --no-warn-script-location 'google-cloud-aiplatform==1.16.1' 'kfp==1.8.13' && \"$0\" \"$@\"\n",
+              "sh",
+              "-ec",
+              "program_path=$(mktemp -d)\nprintf \"%s\" \"$0\" > \"$program_path/ephemeral_component.py\"\npython3 -m kfp.v2.components.executor_main                         --component_module_path                         \"$program_path/ephemeral_component.py\"                         \"$@\"\n",
+              "\nimport kfp\nfrom kfp.v2 import dsl\nfrom kfp.v2.dsl import *\nfrom typing import *\n\ndef deploy_ann_index(\n    project: str,\n    location: str,\n    staging_bucket: str,\n    deployed_ann_index_name: str,\n    ann_index_resource_uri: str,\n    index_endpoint_resource_uri: str,\n) -> NamedTuple('Outputs', [\n                            ('index_endpoint_resource_uri', str),\n                            ('ann_index_resource_uri', str),\n                            ('deployed_ann_index_name', str),\n                            ('deployed_ann_index', Artifact),\n                            ]):\n\n  from google.cloud import aiplatform\n  from datetime import datetime\n  TIMESTAMP = datetime.now().strftime(\"%Y%m%d%H%M%S\")\n\n  aiplatform.init(project=project, location=location, staging_bucket=staging_bucket)\n\n  ann_index = aiplatform.MatchingEngineIndex(\n      index_name=ann_index_resource_uri\n  )\n  ann_index_resource_uri = ann_index.resource_name\n\n  index_endpoint = aiplatform.MatchingEngineIndexEndpoint(\n      index_endpoint_resource_uri\n  )\n\n  index_endpoint = index_endpoint.deploy_index(\n      index=ann_index, \n      deployed_index_id=f'{deployed_ann_index_name}-{TIMESTAMP}'\n  )\n\n  print(index_endpoint.deployed_indexes)\n\n  return (\n      f'{index_endpoint_resource_uri}',\n      f'{ann_index_resource_uri}',\n      f'{deployed_ann_index_name}-{TIMESTAMP}',\n      ann_index,\n  )\n\n"
+            ],
+            "image": "python:3.9"
+          }
+        },
+        "exec-deploy-brute-index": {
+          "container": {
+            "args": [
+              "--executor_input",
+              "{{$}}",
+              "--function_to_execute",
+              "deploy_brute_index"
+            ],
+            "command": [
+              "sh",
+              "-c",
+              "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip || python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet     --no-warn-script-location 'google-cloud-aiplatform==1.16.1' 'kfp==1.8.13' && \"$0\" \"$@\"\n",
+              "sh",
+              "-ec",
+              "program_path=$(mktemp -d)\nprintf \"%s\" \"$0\" > \"$program_path/ephemeral_component.py\"\npython3 -m kfp.v2.components.executor_main                         --component_module_path                         \"$program_path/ephemeral_component.py\"                         \"$@\"\n",
+              "\nimport kfp\nfrom kfp.v2 import dsl\nfrom kfp.v2.dsl import *\nfrom typing import *\n\ndef deploy_brute_index(\n    project: str,\n    location: str,\n    staging_bucket: str,\n    deployed_brute_force_index_name: str,\n    brute_force_index_resource_uri: str,\n    index_endpoint_resource_uri: str,\n) -> NamedTuple('Outputs', [\n                            ('index_endpoint_resource_uri', str),\n                            ('brute_force_index_resource_uri', str),\n                            ('deployed_brute_force_index_name', str),\n                            ('deployed_brute_force_index', Artifact),\n                            ]):\n\n  from google.cloud import aiplatform\n  from datetime import datetime\n  TIMESTAMP = datetime.now().strftime(\"%Y%m%d%H%M%S\")\n\n  aiplatform.init(project=project, location=location, staging_bucket=staging_bucket)\n\n  brute_index = aiplatform.MatchingEngineIndex(\n      index_name=brute_force_index_resource_uri\n  )\n  brute_force_index_resource_uri = brute_index.resource_name\n\n  index_endpoint = aiplatform.MatchingEngineIndexEndpoint(index_endpoint_resource_uri)\n\n  index_endpoint = index_endpoint.deploy_index(\n      index=brute_index, \n      deployed_index_id=f'{deployed_brute_force_index_name}-{TIMESTAMP}'\n  )\n\n  print(index_endpoint.deployed_indexes)\n\n  return (\n      f'{index_endpoint_resource_uri}',\n      f'{brute_force_index_resource_uri}',\n      f'{deployed_brute_force_index_name}-{TIMESTAMP}',\n      brute_index,\n  )\n\n"
+            ],
+            "image": "python:3.9"
+          }
+        },
+        "exec-feature-extraction": {
+          "container": {
+            "args": [
+              "--executor_input",
+              "{{$}}",
+              "--function_to_execute",
+              "feature_extraction"
+            ],
+            "command": [
+              "sh",
+              "-c",
+              "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip || python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet     --no-warn-script-location 'google-cloud-aiplatform==1.16.1' 'google-cloud-storage' 'tensorflow==2.8' 'tensorflow-hub==0.12.0' 'tensorflow-estimator==2.8.0' 'keras==2.8.0' 'kfp==1.8.13' && \"$0\" \"$@\"\n",
+              "sh",
+              "-ec",
+              "program_path=$(mktemp -d)\nprintf \"%s\" \"$0\" > \"$program_path/ephemeral_component.py\"\npython3 -m kfp.v2.components.executor_main                         --component_module_path                         \"$program_path/ephemeral_component.py\"                         \"$@\"\n",
+              "\nimport kfp\nfrom kfp.v2 import dsl\nfrom kfp.v2.dsl import *\nfrom typing import *\n\ndef feature_extraction(\n    project: str,\n    location: str,\n    images_gcs_uri: str,\n    emb_index_gcs_uri: str,\n    saved_model_gcs_bucket: str,\n    index_json_name: str,\n    # model_resource_path: str,\n    # vertex_model_gcs_dir: str,\n) -> NamedTuple('Outputs', [('embedding_index_file_uri', str),\n                            ('saved_pretrained_model_gcs_location', str),\n                            # ('img_bottleneck_model', Artifact),\n                            ]):\n  import os\n  from google.cloud import storage\n  from google.cloud.storage.bucket import Bucket\n  from google.cloud.storage.blob import Blob\n  from datetime import datetime\n  import tensorflow as tf\n  import tensorflow_hub as hub\n\n\n  # Load compressed models from tensorflow_hub\n  os.environ['TFHUB_MODEL_LOAD_FORMAT'] = 'COMPRESSED'\n\n  # TODO: paramaterize\n  IMG_HEIGHT = 224\n  IMG_WIDTH = 224\n  IMG_CHANNELS = 3\n  BATCH_SIZE = 32\n  NUM_IMAGES = 510\n  NUM_NEIGH = 3 # top 3\n\n  # ==============================================================================\n  # Define helper functions\n  # ==============================================================================\n\n  def _upload_blob_gcs(gcs_uri, source_file_name, destination_blob_name):\n    \"\"\"Uploads a file to GCS bucket\"\"\"\n    client = storage.Client(project=project)\n    blob = Blob.from_string(os.path.join(gcs_uri, destination_blob_name))\n    blob.bucket._client = client\n    blob.upload_from_filename(source_file_name)\n\n  def read_and_decode(filename, reshape_dims=[IMG_HEIGHT, IMG_WIDTH]):\n    # Read the file\n    img = tf.io.read_file(filename)\n\n    # Convert the compressed string to a 3D uint8 tensor.\n    img = tf.image.decode_jpeg(img, channels=IMG_CHANNELS)\n\n    # Use `convert_image_dtype` to convert to floats in the [0,1] range.\n    # This makes the img 1 x 224 x 224 x 3 tensor with the data type of float32\n    img = tf.image.convert_image_dtype(img, tf.float32)[tf.newaxis, ...]\n\n    # Resize the image to the desired size.\n    return tf.image.resize(img, reshape_dims)\n\n  def create_embeddings_dataset(embedder, img_path):\n    dataset_filenames = []\n    dataset_embeddings = []\n\n    list_dir = tf.io.gfile.listdir(img_path)\n\n    for file in list_dir:\n      img_tensor = read_and_decode(img_path + \"/\" + file, [IMG_WIDTH, IMG_HEIGHT])\n      embeddings = embedder(img_tensor)\n      dataset_filenames.append(img_path + \"/\" + file)\n      dataset_embeddings.extend(embeddings)\n\n    dataset_embeddings = tf.convert_to_tensor(dataset_embeddings)\n\n    return dataset_filenames, dataset_embeddings\n\n  # ==============================================================================\n  # Download pre-trained model\n  # ==============================================================================\n  layers = [\n      hub.KerasLayer(\n          \"https://tfhub.dev/google/tf2-preview/mobilenet_v2/feature_vector/4\", # TODO: paramaterize\n          input_shape=(IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS),\n          trainable=False,\n          name='mobilenet_embedding'),\n      tf.keras.layers.Flatten()\n  ]\n\n  model = tf.keras.Sequential(layers, name='pretrained_mobilenet') # TODO: paramaterize\n  # loaded_model = tf.keras.models.load_model(vertex_model_gcs_dir)\n  # print(\"model summary:\", loaded_model.summary())\n\n  TIMESTAMP = datetime.now().strftime(\"%Y%m%d%H%M%S\")\n  MODEL_NAME = f'pipe-mobilenet_v2-{TIMESTAMP}'\n  print(\"MODEL_NAME\", MODEL_NAME)\n\n  save_path = os.path.join(saved_model_gcs_bucket, MODEL_NAME) # \"gs://\", \n  print(\"model save_path\", save_path)\n\n  model.save(save_path)\n\n  # ==============================================================================\n  # Create embedding dataset\n  # ==============================================================================\n  dataset_filenames, dataset_embeddings = create_embeddings_dataset(\n    lambda x: model.predict(x),\n    images_gcs_uri\n  )\n\n  print(\"sample dataset_filenames\", dataset_filenames[:3])\n  print(\"dataset_embeddings shape:\", dataset_embeddings.shape)\n\n  # ==============================================================================\n  # Write Embeddings and IDs to json\n  # ==============================================================================\n\n  # TODO: this code will only work with the file pattern created from zipped file\n  #       adjust this to expected GCS file patterns\n\n  with open(f\"{index_json_name}\", \"w\") as f:\n    for gcs_uri, vector in zip(dataset_filenames,dataset_embeddings):\n      x = gcs_uri.split(\"/\")[-1]\n      id = x.split(\".\")[0]\n      vector = vector.numpy()\n      f.write('{\"id\":\"' + str(id) + '\",')\n      f.write('\"embedding\":[' + \",\".join(str(x) for x in vector) + \"]}\")\n      f.write(\"\\n\")\n\n  _upload_blob_gcs(emb_index_gcs_uri, f\"{index_json_name}\", f\"{index_json_name}\") \n\n  embedding_index_file_uri = f'{emb_index_gcs_uri}/{index_json_name}'\n  print(\"embedding_index_file_uri:\", embedding_index_file_uri)\n\n  return(\n      f'{embedding_index_file_uri}',\n      f'{save_path}',\n  )\n\n"
+            ],
+            "image": "python:3.9"
+          }
+        },
+        "exec-query-deployed-indexes": {
+          "container": {
+            "args": [
+              "--executor_input",
+              "{{$}}",
+              "--function_to_execute",
+              "query_deployed_indexes"
+            ],
+            "command": [
+              "sh",
+              "-c",
+              "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip || python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet     --no-warn-script-location 'google-cloud-aiplatform==1.16.1' 'google-cloud-storage' 'tensorflow==2.8' 'tensorflow-hub==0.12.0' 'tensorflow-estimator==2.8.0' 'keras==2.8' 'kfp==1.8.13' && \"$0\" \"$@\"\n",
+              "sh",
+              "-ec",
+              "program_path=$(mktemp -d)\nprintf \"%s\" \"$0\" > \"$program_path/ephemeral_component.py\"\npython3 -m kfp.v2.components.executor_main                         --component_module_path                         \"$program_path/ephemeral_component.py\"                         \"$@\"\n",
+              "\nimport kfp\nfrom kfp.v2 import dsl\nfrom kfp.v2.dsl import *\nfrom typing import *\n\ndef query_deployed_indexes(\n    project: str,\n    location: str,\n    staging_bucket: str,\n    num_neighbors: int,\n    index_endpoint_resource_uri: str,\n    deployed_brute_force_index_name: str,\n    deployed_ann_index_name: str,\n    test_imgs_gcs_dir: str,\n    num_test_samples: int,\n    vertex_model_gcs_dir: str,):\n\n  import os\n  import numpy\n  import tensorflow as tf\n  import tensorflow_hub as hub\n  from google.cloud import aiplatform\n  from datetime import datetime\n\n  aiplatform.init(project=project, location=location, staging_bucket=staging_bucket)\n\n  os.environ['TFHUB_MODEL_LOAD_FORMAT'] = 'COMPRESSED'\n\n  IMG_HEIGHT = 224\n  IMG_WIDTH = 224\n  IMG_CHANNELS = 3\n\n  ##############################################################################\n  # Helper Functions\n  ##############################################################################\n\n  def read_and_decode(filename, reshape_dims=[IMG_HEIGHT, IMG_WIDTH]):\n    # Read the file\n    img = tf.io.read_file(filename)\n\n    # Convert the compressed string to a 3D uint8 tensor.\n    img = tf.image.decode_jpeg(img, channels=IMG_CHANNELS)\n\n    # Use `convert_image_dtype` to convert to floats in the [0,1] range.\n    # This makes the img 1 x 224 x 224 x 3 tensor with the data type of float32\n    img = tf.image.convert_image_dtype(img, tf.float32)[tf.newaxis, ...]\n\n    # Resize the image to the desired size.\n    return tf.image.resize(img, reshape_dims)\n\n  def create_query_embeddings(embedder, img_path):\n    dataset_filenames = []\n    dataset_embeddings = []\n    list_dir = tf.io.gfile.listdir(img_path)\n\n    for file in list_dir[:num_test_samples]:\n      img_tensor = read_and_decode(img_path + \"/\" + file, [IMG_WIDTH, IMG_HEIGHT])\n      embeddings = embedder(img_tensor)\n      dataset_filenames.append(img_path + \"/\" + file)\n      dataset_embeddings.extend(embeddings)\n\n    dataset_embeddings = tf.convert_to_tensor(dataset_embeddings)\n    return dataset_filenames, dataset_embeddings\n\n  ##############################################################################\n  # Init IndexEndpoint, Load Model, Create Query embeddings\n  ##############################################################################\n\n  index_endpoint = aiplatform.MatchingEngineIndexEndpoint(index_endpoint_resource_uri)\n\n  loaded_model = tf.keras.models.load_model(vertex_model_gcs_dir)\n  print(\"model summary:\", loaded_model.summary())\n\n  query_filenames, query_embeddings = create_query_embeddings(\n      lambda x: loaded_model.predict(x),\n      test_imgs_gcs_dir\n  )\n  print(\"query_embeddings shape:\", query_embeddings.shape)\n  print(\"query_filenames:\", query_filenames)\n\n  vector_list = []\n  for q_vector in query_embeddings:\n    vector_list.append(q_vector.numpy())\n\n  ann_response = index_endpoint.match(\n      deployed_index_id=deployed_ann_index_name, \n      queries=vector_list, \n      num_neighbors=num_neighbors\n  )\n  print(\"ann_response:\", ann_response)\n\n  brute_force_response = index_endpoint.match(\n      deployed_index_id=deployed_brute_force_index_name, \n      queries=vector_list, \n      num_neighbors=num_neighbors\n  )\n\n  print(\"brute_force_response:\", brute_force_response)\n\n"
+            ],
+            "image": "python:3.9"
+          }
+        }
+      }
+    },
+    "pipelineInfo": {
+      "name": "v1-retail-visual-similarity-v1"
+    },
+    "root": {
+      "dag": {
+        "tasks": {
+          "create-ann-index": {
+            "cachingOptions": {
+              "enableCache": true
+            },
+            "componentRef": {
+              "name": "comp-create-ann-index"
+            },
+            "dependentTasks": [
+              "feature-extraction"
+            ],
+            "inputs": {
+              "parameters": {
+                "ann_index_description": {
+                  "componentInputParameter": "ann_index_description"
+                },
+                "ann_index_display_name": {
+                  "componentInputParameter": "ann_index_display_name"
+                },
+                "ann_index_labels": {
+                  "componentInputParameter": "ann_index_labels"
+                },
+                "approximate_neighbors_count": {
+                  "componentInputParameter": "approximate_neighbors_count"
+                },
+                "dimensions": {
+                  "componentInputParameter": "dimensions"
+                },
+                "distance_measure_type": {
+                  "componentInputParameter": "distance_measure_type"
+                },
+                "emb_index_gcs_uri": {
+                  "componentInputParameter": "emb_index_gcs_uri"
+                },
+                "leaf_node_embedding_count": {
+                  "componentInputParameter": "leaf_node_embedding_count"
+                },
+                "leaf_nodes_to_search_percent": {
+                  "componentInputParameter": "leaf_nodes_to_search_percent"
+                },
+                "location": {
+                  "componentInputParameter": "location"
+                },
+                "project": {
+                  "componentInputParameter": "project"
+                },
+                "staging_bucket": {
+                  "componentInputParameter": "staging_bucket"
+                },
+                "vpc_network_name": {
+                  "componentInputParameter": "vpc_network_name"
+                }
+              }
+            },
+            "taskInfo": {
+              "name": "Create ANN Index"
+            }
+          },
+          "create-brute-force-index": {
+            "cachingOptions": {
+              "enableCache": true
+            },
+            "componentRef": {
+              "name": "comp-create-brute-force-index"
+            },
+            "dependentTasks": [
+              "feature-extraction"
+            ],
+            "inputs": {
+              "parameters": {
+                "approximate_neighbors_count": {
+                  "componentInputParameter": "approximate_neighbors_count"
+                },
+                "brute_force_index_description": {
+                  "componentInputParameter": "brute_force_index_description"
+                },
+                "brute_force_index_display_name": {
+                  "componentInputParameter": "brute_force_index_display_name"
+                },
+                "brute_force_index_labels": {
+                  "componentInputParameter": "brute_force_index_labels"
+                },
+                "dimensions": {
+                  "componentInputParameter": "dimensions"
+                },
+                "distance_measure_type": {
+                  "componentInputParameter": "distance_measure_type"
+                },
+                "emb_index_gcs_uri": {
+                  "componentInputParameter": "emb_index_gcs_uri"
+                },
+                "location": {
+                  "componentInputParameter": "location"
+                },
+                "project": {
+                  "componentInputParameter": "project"
+                },
+                "staging_bucket": {
+                  "componentInputParameter": "staging_bucket"
+                },
+                "vpc_network_name": {
+                  "componentInputParameter": "vpc_network_name"
+                }
+              }
+            },
+            "taskInfo": {
+              "name": "Create Brute Force Index"
+            }
+          },
+          "create-index-endpoint-vpc": {
+            "cachingOptions": {
+              "enableCache": true
+            },
+            "componentRef": {
+              "name": "comp-create-index-endpoint-vpc"
+            },
+            "dependentTasks": [
+              "feature-extraction"
+            ],
+            "inputs": {
+              "parameters": {
+                "index_endpoint_description": {
+                  "componentInputParameter": "index_endpoint_description"
+                },
+                "index_endpoint_display_name": {
+                  "componentInputParameter": "index_endpoint_display_name"
+                },
+                "location": {
+                  "componentInputParameter": "location"
+                },
+                "project": {
+                  "componentInputParameter": "project"
+                },
+                "project_number": {
+                  "componentInputParameter": "project_number"
+                },
+                "staging_bucket": {
+                  "componentInputParameter": "staging_bucket"
+                },
+                "vpc_network_name": {
+                  "componentInputParameter": "vpc_network_name"
+                }
+              }
+            },
+            "taskInfo": {
+              "name": "Create Index Endpoint"
+            }
+          },
+          "deploy-ann-index": {
+            "cachingOptions": {
+              "enableCache": true
+            },
+            "componentRef": {
+              "name": "comp-deploy-ann-index"
+            },
+            "dependentTasks": [
+              "create-ann-index",
+              "create-index-endpoint-vpc"
+            ],
+            "inputs": {
+              "parameters": {
+                "ann_index_resource_uri": {
+                  "taskOutputParameter": {
+                    "outputParameterKey": "ann_index_resource_uri",
+                    "producerTask": "create-ann-index"
+                  }
+                },
+                "deployed_ann_index_name": {
+                  "componentInputParameter": "deployed_ann_index_name"
+                },
+                "index_endpoint_resource_uri": {
+                  "taskOutputParameter": {
+                    "outputParameterKey": "index_endpoint_resource_uri",
+                    "producerTask": "create-index-endpoint-vpc"
+                  }
+                },
+                "location": {
+                  "componentInputParameter": "location"
+                },
+                "project": {
+                  "componentInputParameter": "project"
+                },
+                "staging_bucket": {
+                  "componentInputParameter": "staging_bucket"
+                }
+              }
+            },
+            "taskInfo": {
+              "name": "Deploy ANN Index"
+            }
+          },
+          "deploy-brute-index": {
+            "cachingOptions": {
+              "enableCache": true
+            },
+            "componentRef": {
+              "name": "comp-deploy-brute-index"
+            },
+            "dependentTasks": [
+              "create-brute-force-index",
+              "create-index-endpoint-vpc"
+            ],
+            "inputs": {
+              "parameters": {
+                "brute_force_index_resource_uri": {
+                  "taskOutputParameter": {
+                    "outputParameterKey": "brute_force_index_resource_uri",
+                    "producerTask": "create-brute-force-index"
+                  }
+                },
+                "deployed_brute_force_index_name": {
+                  "componentInputParameter": "deployed_brute_force_index_name"
+                },
+                "index_endpoint_resource_uri": {
+                  "taskOutputParameter": {
+                    "outputParameterKey": "index_endpoint_resource_uri",
+                    "producerTask": "create-index-endpoint-vpc"
+                  }
+                },
+                "location": {
+                  "componentInputParameter": "location"
+                },
+                "project": {
+                  "componentInputParameter": "project"
+                },
+                "staging_bucket": {
+                  "componentInputParameter": "staging_bucket"
+                }
+              }
+            },
+            "taskInfo": {
+              "name": "Deploy Brute Force"
+            }
+          },
+          "feature-extraction": {
+            "cachingOptions": {
+              "enableCache": true
+            },
+            "componentRef": {
+              "name": "comp-feature-extraction"
+            },
+            "inputs": {
+              "parameters": {
+                "emb_index_gcs_uri": {
+                  "componentInputParameter": "emb_index_gcs_uri"
+                },
+                "images_gcs_uri": {
+                  "componentInputParameter": "images_gcs_uri"
+                },
+                "index_json_name": {
+                  "componentInputParameter": "index_json_name"
+                },
+                "location": {
+                  "componentInputParameter": "location"
+                },
+                "project": {
+                  "componentInputParameter": "project"
+                },
+                "saved_model_gcs_bucket": {
+                  "componentInputParameter": "saved_model_gcs_bucket"
+                }
+              }
+            },
+            "taskInfo": {
+              "name": "Feature Extraction"
+            }
+          },
+          "query-deployed-indexes": {
+            "cachingOptions": {
+              "enableCache": true
+            },
+            "componentRef": {
+              "name": "comp-query-deployed-indexes"
+            },
+            "dependentTasks": [
+              "create-index-endpoint-vpc",
+              "deploy-ann-index",
+              "deploy-brute-index",
+              "feature-extraction"
+            ],
+            "inputs": {
+              "parameters": {
+                "deployed_ann_index_name": {
+                  "taskOutputParameter": {
+                    "outputParameterKey": "deployed_ann_index_name",
+                    "producerTask": "deploy-ann-index"
+                  }
+                },
+                "deployed_brute_force_index_name": {
+                  "taskOutputParameter": {
+                    "outputParameterKey": "deployed_brute_force_index_name",
+                    "producerTask": "deploy-brute-index"
+                  }
+                },
+                "index_endpoint_resource_uri": {
+                  "taskOutputParameter": {
+                    "outputParameterKey": "index_endpoint_resource_uri",
+                    "producerTask": "create-index-endpoint-vpc"
+                  }
+                },
+                "location": {
+                  "componentInputParameter": "location"
+                },
+                "num_neighbors": {
+                  "componentInputParameter": "num_neighbors"
+                },
+                "num_test_samples": {
+                  "componentInputParameter": "num_test_samples"
+                },
+                "project": {
+                  "componentInputParameter": "project"
+                },
+                "staging_bucket": {
+                  "componentInputParameter": "staging_bucket"
+                },
+                "test_imgs_gcs_dir": {
+                  "componentInputParameter": "test_imgs_gcs_dir"
+                },
+                "vertex_model_gcs_dir": {
+                  "taskOutputParameter": {
+                    "outputParameterKey": "saved_pretrained_model_gcs_location",
+                    "producerTask": "feature-extraction"
+                  }
+                }
+              }
+            },
+            "taskInfo": {
+              "name": "Query Deployed Indexes"
+            }
+          }
+        }
+      },
+      "inputDefinitions": {
+        "parameters": {
+          "ann_index_description": {
+            "type": "STRING"
+          },
+          "ann_index_display_name": {
+            "type": "STRING"
+          },
+          "ann_index_labels": {
+            "type": "STRING"
+          },
+          "approximate_neighbors_count": {
+            "type": "INT"
+          },
+          "brute_force_index_description": {
+            "type": "STRING"
+          },
+          "brute_force_index_display_name": {
+            "type": "STRING"
+          },
+          "brute_force_index_labels": {
+            "type": "STRING"
+          },
+          "deployed_ann_index_name": {
+            "type": "STRING"
+          },
+          "deployed_brute_force_index_name": {
+            "type": "STRING"
+          },
+          "dimensions": {
+            "type": "INT"
+          },
+          "distance_measure_type": {
+            "type": "STRING"
+          },
+          "emb_index_gcs_uri": {
+            "type": "STRING"
+          },
+          "images_gcs_uri": {
+            "type": "STRING"
+          },
+          "index_endpoint_description": {
+            "type": "STRING"
+          },
+          "index_endpoint_display_name": {
+            "type": "STRING"
+          },
+          "index_json_name": {
+            "type": "STRING"
+          },
+          "leaf_node_embedding_count": {
+            "type": "INT"
+          },
+          "leaf_nodes_to_search_percent": {
+            "type": "INT"
+          },
+          "location": {
+            "type": "STRING"
+          },
+          "model_display_name": {
+            "type": "STRING"
+          },
+          "model_endpoint_name": {
+            "type": "STRING"
+          },
+          "num_neighbors": {
+            "type": "INT"
+          },
+          "num_test_samples": {
+            "type": "INT"
+          },
+          "project": {
+            "type": "STRING"
+          },
+          "project_number": {
+            "type": "STRING"
+          },
+          "saved_model_gcs_bucket": {
+            "type": "STRING"
+          },
+          "serving_container_image_uri": {
+            "type": "STRING"
+          },
+          "serving_machine_type": {
+            "type": "STRING"
+          },
+          "serving_max_replica_count": {
+            "type": "INT"
+          },
+          "serving_min_replica_count": {
+            "type": "INT"
+          },
+          "staging_bucket": {
+            "type": "STRING"
+          },
+          "test_imgs_gcs_dir": {
+            "type": "STRING"
+          },
+          "traffic_percentage": {
+            "type": "INT"
+          },
+          "vpc_network_name": {
+            "type": "STRING"
+          }
+        }
+      }
+    },
+    "schemaVersion": "2.0.0",
+    "sdkVersion": "kfp-1.8.13"
+  },
+  "runtimeConfig": {}
+}
