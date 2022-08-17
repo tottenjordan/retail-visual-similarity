@@ -1,5 +1,11 @@
 # retail-visual-similarity
 
+> end-to-end visual similarity solution using Vertex Matching Engine
+
+* [`retail-dataset-prep.ipynb`](https://github.com/tottenjordan/retail-visual-similarity/blob/main/retail-dataset-prep.ipynb) - instructions for downloading and preparing the [Retail Product Dataset](https://www.kaggle.com/c/retail-products-classification/data)
+
+* [`visual-similarity-pipe-dev.ipynb`](https://github.com/tottenjordan/retail-visual-similarity/blob/main/visual-similarity-pipe-dev.ipynb) - notebook for developing a Vertex Managed Pipeline
+
 ### Neural Deep Retrieval - vector similarity matching
 
 1. Use a pretrained deep learning model to extract feature vectors (embeddings) from each image in a retail product catalog
@@ -12,7 +18,7 @@
 
 #### TODO: clean-up repo; adapt to new argolis environments / policies
 
-![End-to-End Vertex Pipeline](https://github.com/tottenjordan/retail-visual-similarity/blob/master/img/pipeline-v1.png?raw=true)
+![pipeline-v1](https://user-images.githubusercontent.com/39886184/185044310-80453f5a-560b-4db4-8ceb-7467c13a364b.png)
 
 * **Load / pre-process images**
 > * decode
