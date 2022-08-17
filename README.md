@@ -2,6 +2,14 @@
 
 ### Neural Deep Retrieval - vector similarity matching
 
+1. Use a pretrained deep learning model to extract feature vectors (embeddings) from each image in a retail product catalog
+
+2. Store embedding vectors in a scalable approximate nearest neighbor (ANN) index, e.g., [Vertex Matching Engine](https://cloud.google.com/vertex-ai/docs/matching-engine/overview), where each image's embedding vectors are indexed by product ID
+
+3. For a given query image, call `model.predict(x)` with the same pretrained model used in (1) to extract the feature vectors (embeddings) from the query image
+
+4. Using the computed feature vectors from (3), query the Matching Engine Index to find the `k` nearest neighbors
+
 #### TODO: clean-up repo; adapt to new argolis environments / policies
 
 ![End-to-End Vertex Pipeline](https://github.com/tottenjordan/retail-visual-similarity/blob/master/img/pipeline-v1.png?raw=true)
@@ -31,7 +39,7 @@
 
 # Archive & Notes
 
-* Matching Engine SDK `TODO: UPDATE`
+* Matching Engine SDK `TODO: UPDATE this LINK`
 
 * See here for preparing the [VPC Network Peering Connection](https://github.com/GoogleCloudPlatform/vertex-ai-samples/blob/main/notebooks/community/matching_engine/matching_engine_for_indexing.ipynb)
 
