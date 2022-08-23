@@ -16,7 +16,10 @@
 
 4. Using the computed feature vectors from (3), query the Matching Engine Index to find the `k` nearest neighbors
 
-#### TODO: clean-up repo; adapt to new argolis environments / policies
+#### TODOs: 
+* (1) add upload/deploy pre-trained model to Vertex Registry/Prediction, 
+* (2) pre-built components for steps in (1), 
+* (3) deploy ANN & Brute Force indices to different endpoints
 
 ![pipeline-v1](https://user-images.githubusercontent.com/39886184/185044310-80453f5a-560b-4db4-8ceb-7467c13a364b.png)
 
