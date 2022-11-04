@@ -1,0 +1,84 @@
+name: Create index endpoint vpc
+inputs:
+- {name: project, type: String}
+- {name: project_number, type: String}
+- {name: location, type: String}
+- {name: staging_bucket, type: String}
+- {name: vpc_network_name, type: String}
+- {name: index_endpoint_display_name, type: String}
+- {name: index_endpoint_description, type: String}
+outputs:
+- {name: vpc_network_resource_uri, type: String}
+- {name: index_endpoint_resource_uri, type: String}
+- {name: index_endpoint, type: Artifact}
+- {name: index_endpoint_display_name, type: String}
+implementation:
+  container:
+    image: python:3.9
+    command:
+    - sh
+    - -c
+    - |2
+
+      if ! [ -x "$(command -v pip)" ]; then
+          python3 -m ensurepip || python3 -m ensurepip --user || apt-get install python3-pip
+      fi
+
+      PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet     --no-warn-script-location 'google-cloud-aiplatform==1.16.1' 'kfp==1.8.13' && "$0" "$@"
+    - sh
+    - -ec
+    - |
+      program_path=$(mktemp -d)
+      printf "%s" "$0" > "$program_path/ephemeral_component.py"
+      python3 -m kfp.v2.components.executor_main                         --component_module_path                         "$program_path/ephemeral_component.py"                         "$@"
+    - |2+
+
+      import kfp
+      from kfp.v2 import dsl
+      from kfp.v2.dsl import *
+      from typing import *
+
+      def create_index_endpoint_vpc(
+          project: str,
+          project_number: str,
+          location: str,
+          staging_bucket: str,
+          vpc_network_name: str,
+          index_endpoint_display_name: str,
+          index_endpoint_description: str,
+      ) -> NamedTuple('Outputs', [
+                                  ('vpc_network_resource_uri', str),
+                                  ('index_endpoint_resource_uri', str),
+                                  ('index_endpoint', Artifact),
+                                  ('index_endpoint_display_name', str),
+                                  ]):
+
+        from google.cloud import aiplatform
+        from datetime import datetime
+
+        aiplatform.init(project=project, location=location, staging_bucket=staging_bucket)
+        TIMESTAMP = datetime.now().strftime("%Y%m%d%H%M%S")
+
+        vpc_network_resource_uri = f'projects/{project_number}/global/networks/{vpc_network_name}'
+        print("vpc_network_resource_uri:", vpc_network_resource_uri)
+
+        index_endpoint = aiplatform.MatchingEngineIndexEndpoint.create(
+            display_name=f'{index_endpoint_display_name}-{TIMESTAMP}',
+            description=index_endpoint_description,
+            network=vpc_network_resource_uri,
+        )
+        index_endpoint_resource_uri = index_endpoint.resource_name
+        print("index_endpoint_resource_uri:", index_endpoint_resource_uri)
+
+        return (
+            f'{vpc_network_resource_uri}',
+            f'{index_endpoint_resource_uri}',
+            index_endpoint,
+            f'{index_endpoint_display_name}-{TIMESTAMP}'
+        )
+
+    args:
+    - --executor_input
+    - {executorInput: null}
+    - --function_to_execute
+    - create_index_endpoint_vpc
